@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
@@ -11,6 +11,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const { token, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isPublicPage = pathname.startsWith('/login') || pathname.startsWith('/register');
 
@@ -19,6 +20,11 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       router.push('/login');
     }
   }, [token, isLoading, isPublicPage, router]);
+
+  // Close mobile drawer on route transition
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   if (isPublicPage) {
     return <main className="min-h-screen bg-slate-50">{children}</main>;
@@ -37,10 +43,15 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      <Sidebar />
+      {/* Sidebar handles both desktop sticky and mobile drawer */}
+      <Sidebar isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+
+      {/* Main Body */}
       <div className="flex-1 flex flex-col min-w-0">
-        <Header />
-        <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto">{children}</main>
+        <Header onToggleMobile={() => setMobileMenuOpen((prev) => !prev)} />
+        <main className="flex-1 p-3.5 sm:p-6 md:p-8 max-w-7xl w-full mx-auto overflow-x-hidden">
+          {children}
+        </main>
       </div>
     </div>
   );

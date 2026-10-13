@@ -136,12 +136,12 @@ export default function LogisticsPage() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex border-b border-slate-200 gap-6">
+      <div className="flex border-b border-slate-200 gap-4 sm:gap-6 overflow-x-auto">
         {(['ALL', 'DELIVERY', 'PICKUP'] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTypeFilter(t)}
-            className={`pb-3 text-sm font-bold border-b-2 transition-all ${
+            className={`pb-3 text-sm font-bold border-b-2 transition-all whitespace-nowrap ${
               typeFilter === t
                 ? 'border-sky-600 text-sky-600'
                 : 'border-transparent text-slate-500 hover:text-slate-800'
@@ -240,8 +240,8 @@ export default function LogisticsPage() {
 
       {/* Schedule Dispatch Modal */}
       {createModalOpen && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-slate-900">Schedule Pickup or Delivery</h3>
 
             <form onSubmit={handleCreate} className="space-y-3.5">

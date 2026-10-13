@@ -199,8 +199,8 @@ export default function StaffPage() {
 
       {/* Add Staff Modal */}
       {createModalOpen && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-slate-900">Add Staff Account</h3>
 
             <form onSubmit={handleCreateStaff} className="space-y-3.5">

@@ -151,11 +151,11 @@ export default function ExternalBatchesPage() {
           batches.map((b: any) => (
             <div
               key={b.id}
-              className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-4"
+              className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 shadow-sm space-y-4"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                  <div className="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold shrink-0">
                     <Layers className="w-5 h-5" />
                   </div>
                   <div>
@@ -190,7 +190,7 @@ export default function ExternalBatchesPage() {
                         setMissingIds([]);
                         setReconcileNotes('');
                       }}
-                      className="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition-all shadow-sm shadow-sky-600/20"
+                      className="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition-all shadow-sm shadow-sky-600/20 whitespace-nowrap"
                     >
                       Reconcile Return
                     </button>
@@ -199,7 +199,7 @@ export default function ExternalBatchesPage() {
               </div>
 
               {/* Items in Batch */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                 {b.items?.map((it: any) => (
                   <div
                     key={it.id}
@@ -214,14 +214,14 @@ export default function ExternalBatchesPage() {
                     <div className="font-medium text-slate-700 truncate">
                       {it.garment?.garmentType}
                     </div>
-                    <div className="text-slate-400 text-[11px]">
+                    <div className="text-slate-400 text-[11px] truncate">
                       Client: {it.garment?.customer?.name}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-slate-500 pt-1">
                 <div>
                   Dispatched {new Date(b.sentDate).toLocaleDateString()} • Expected Return:{' '}
                   <span className="font-semibold text-slate-700">
@@ -241,8 +241,8 @@ export default function ExternalBatchesPage() {
 
       {/* Dispatch Modal */}
       {createModalOpen && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-slate-900">Dispatch Batch to External Partner</h3>
 
             <form onSubmit={handleDispatchBatch} className="space-y-4">
@@ -342,9 +342,9 @@ export default function ExternalBatchesPage() {
 
       {/* Reconcile Modal */}
       {reconcileModalBatch && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold text-slate-900">
+        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900">
               Reconcile Return: {reconcileModalBatch.batchNumber}
             </h3>
             <p className="text-xs text-slate-500">
@@ -362,7 +362,7 @@ export default function ExternalBatchesPage() {
                   return (
                     <div
                       key={it.id}
-                      className="p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs flex items-center justify-between"
+                      className="p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2"
                     >
                       <div>
                         <div className="font-mono font-bold text-slate-900">

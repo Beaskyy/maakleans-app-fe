@@ -179,8 +179,8 @@ export default function OrderDetailsPage() {
       </div>
 
       {/* Status & Highlights Banner */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
+      <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
           <div>
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
               Workflow Status
@@ -192,7 +192,7 @@ export default function OrderDetailsPage() {
             </div>
           </div>
 
-          <div className="h-8 w-px bg-slate-200"></div>
+          <div className="h-8 w-px bg-slate-200 hidden sm:block"></div>
 
           <div>
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
@@ -219,7 +219,7 @@ export default function OrderDetailsPage() {
             disabled={transitioningStatus}
             value={order.status}
             onChange={(e) => handleStatusChange(e.target.value)}
-            className="p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:ring-2 focus:ring-sky-500"
+            className="flex-1 sm:flex-initial p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:ring-2 focus:ring-sky-500"
           >
             <option value="RECEIVED">RECEIVED</option>
             <option value="PROCESSING">PROCESSING</option>
@@ -236,7 +236,7 @@ export default function OrderDetailsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Garments Tracking List */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6">
+          <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-4 sm:p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-base font-bold text-slate-900">Tracked Garments</h2>
@@ -426,8 +426,8 @@ export default function OrderDetailsPage() {
 
       {/* Record Payment Modal */}
       {paymentModalOpen && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
+        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-slate-900 mb-1">Record Order Payment</h3>
             <p className="text-xs text-slate-500 mb-4">
               Add payment for Order #{order.orderNumber} (Balance: ₦{order.balanceAmount.toLocaleString()})
