@@ -78,7 +78,7 @@ export default function OrdersPage() {
       </div>
 
       {/* Filters Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-center gap-3">
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-stretch md:items-center gap-3">
         {/* Search */}
         <div className="w-full md:flex-1 relative">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -94,49 +94,51 @@ export default function OrdersPage() {
           />
         </div>
 
-        {/* Status Filter */}
-        <div className="w-full md:w-auto flex items-center gap-2">
-          <span className="text-xs font-semibold text-slate-400 uppercase">Status:</span>
-          <select
-            value={status}
-            onChange={(e) => {
-              setStatus(e.target.value);
-              setPage(1);
-            }}
-            className="bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
-          >
-            {STATUS_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt.replace(/_/g, ' ')}
-              </option>
-            ))}
-          </select>
-        </div>
+        <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full md:w-auto">
+          {/* Status Filter */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span className="text-xs font-semibold text-slate-400 uppercase hidden sm:inline">Status:</span>
+            <select
+              value={status}
+              onChange={(e) => {
+                setStatus(e.target.value);
+                setPage(1);
+              }}
+              className="w-full sm:w-auto bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold px-2.5 sm:px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            >
+              {STATUS_OPTIONS.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt.replace(/_/g, ' ')}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        {/* Payment Filter */}
-        <div className="w-full md:w-auto flex items-center gap-2">
-          <span className="text-xs font-semibold text-slate-400 uppercase">Payment:</span>
-          <select
-            value={paymentStatus}
-            onChange={(e) => {
-              setPaymentStatus(e.target.value);
-              setPage(1);
-            }}
-            className="bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
-          >
-            {PAYMENT_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt.replace(/_/g, ' ')}
-              </option>
-            ))}
-          </select>
+          {/* Payment Filter */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span className="text-xs font-semibold text-slate-400 uppercase hidden sm:inline">Payment:</span>
+            <select
+              value={paymentStatus}
+              onChange={(e) => {
+                setPaymentStatus(e.target.value);
+                setPage(1);
+              }}
+              className="w-full sm:w-auto bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold px-2.5 sm:px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            >
+              {PAYMENT_OPTIONS.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt.replace(/_/g, ' ')}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
       {/* Orders Table */}
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm min-w-[850px]">
             <thead>
               <tr className="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                 <th className="py-3.5 px-4">Order #</th>
@@ -241,8 +243,8 @@ export default function OrdersPage() {
 
         {/* Pagination Footer */}
         {pagination.totalPages > 1 && (
-          <div className="p-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <div>
+          <div className="p-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <div className="text-center sm:text-left">
               Showing page <span className="font-bold text-slate-800">{pagination.page}</span> of{' '}
               <span className="font-bold text-slate-800">{pagination.totalPages}</span> (
               {pagination.total} orders total)

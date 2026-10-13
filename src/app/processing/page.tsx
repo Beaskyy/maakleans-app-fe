@@ -90,7 +90,7 @@ export default function ProcessingQcPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-slate-200 gap-6">
+      <div className="flex border-b border-slate-200 gap-4 sm:gap-6 overflow-x-auto whitespace-nowrap scrollbar-none">
         {[
           { key: 'QC', label: 'QC Inspection Bay' },
           { key: 'WASHING', label: 'Washing Station' },
@@ -99,7 +99,7 @@ export default function ProcessingQcPage() {
           <button
             key={t.key}
             onClick={() => setActiveTab(t.key as any)}
-            className={`pb-3 text-sm font-bold border-b-2 transition-all ${
+            className={`pb-3 text-sm font-bold border-b-2 transition-all shrink-0 ${
               activeTab === t.key
                 ? 'border-sky-600 text-sky-600'
                 : 'border-transparent text-slate-500 hover:text-slate-800'
@@ -171,11 +171,11 @@ export default function ProcessingQcPage() {
 
       {/* QC Inspection Modal */}
       {selectedGarment && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-5">
+        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 sm:space-y-5 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Quality Inspection Checklist</h3>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900">Quality Inspection Checklist</h3>
                 <p className="text-xs text-slate-500">
                   Verify finish, crease, cleanliness, and scent
                 </p>
@@ -228,7 +228,7 @@ export default function ProcessingQcPage() {
             </div>
 
             {/* Decision Buttons */}
-            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-slate-100">
               <button
                 type="button"
                 disabled={submitting}

@@ -200,7 +200,7 @@ export default function SettingsPage() {
             Numbering & Tax Configuration
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div>
               <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                 Order Number Prefix
@@ -259,7 +259,7 @@ export default function SettingsPage() {
           <button
             type="submit"
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-2.5 bg-sky-600 hover:bg-sky-700 disabled:opacity-40 text-white font-bold rounded-xl shadow-md shadow-sky-600/20 transition-all text-sm"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-sky-600 hover:bg-sky-700 disabled:opacity-40 text-white font-bold rounded-xl shadow-md shadow-sky-600/20 transition-all text-sm"
           >
             <Save className="w-4 h-4" />
             <span>{saving ? 'Saving...' : 'Save Changes'}</span>

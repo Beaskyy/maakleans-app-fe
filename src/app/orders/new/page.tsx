@@ -227,22 +227,22 @@ export default function CreateOrderPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
             Order Intake Wizard
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
             Register garments, assign services, and calculate authoritative billing
           </p>
         </div>
 
         {/* Step Indicator */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 self-start sm:self-auto">
           {[1, 2, 3].map((s) => (
             <div
               key={s}
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                 step === s
                   ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30 ring-2 ring-sky-300'
                   : step > s
@@ -250,7 +250,7 @@ export default function CreateOrderPage() {
                   : 'bg-slate-200 text-slate-600'
               }`}
             >
-              {step > s ? <CheckCircle2 className="w-4 h-4" /> : s}
+              {step > s ? <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : s}
             </div>
           ))}
         </div>
@@ -265,10 +265,10 @@ export default function CreateOrderPage() {
 
       {/* STEP 1: Select or Create Customer */}
       {step === 1 && (
-        <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Step 1: Select Customer</h2>
+              <h2 className="text-base sm:text-lg font-bold text-slate-900">Step 1: Select Customer</h2>
               <p className="text-xs text-slate-500">Pick an existing client or register a new one</p>
             </div>
             <button
@@ -370,10 +370,10 @@ export default function CreateOrderPage() {
 
       {/* STEP 2: Garments & Service Selection */}
       {step === 2 && (
-        <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Step 2: Add Garments & Services</h2>
+              <h2 className="text-base sm:text-lg font-bold text-slate-900">Step 2: Add Garments & Services</h2>
               <p className="text-xs text-slate-500">Each item receives a unique tracking barcode</p>
             </div>
             <button
@@ -390,7 +390,7 @@ export default function CreateOrderPage() {
             {garments.map((g, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3 relative"
+                className="p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3 relative"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -410,7 +410,7 @@ export default function CreateOrderPage() {
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                   <div>
                     <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1">
                       Garment Description *
@@ -521,13 +521,13 @@ export default function CreateOrderPage() {
 
       {/* STEP 3: Logistics, Price Calculation & Deposit */}
       {step === 3 && (
-        <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
           <div className="border-b border-slate-100 pb-4">
-            <h2 className="text-lg font-bold text-slate-900">Step 3: Schedule, Logistics & Review</h2>
+            <h2 className="text-base sm:text-lg font-bold text-slate-900">Step 3: Schedule, Logistics & Review</h2>
             <p className="text-xs text-slate-500">Authoritative calculation and initial payment</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Logistics & Delivery Options */}
             <div className="space-y-4">
               <div>
@@ -616,7 +616,7 @@ export default function CreateOrderPage() {
             </div>
 
             {/* Authoritative Financial Breakdown Box */}
-            <div className="bg-slate-900 text-white p-6 rounded-2xl flex flex-col justify-between">
+            <div className="bg-slate-900 text-white p-5 sm:p-6 rounded-2xl flex flex-col justify-between">
               <div>
                 <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-slate-800 pb-3 mb-4">
                   Invoice & Settlement Summary
@@ -659,7 +659,7 @@ export default function CreateOrderPage() {
                     Initial Deposit / Payment (Optional)
                   </span>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <input
                       type="number"
                       placeholder="Deposit (₦)"

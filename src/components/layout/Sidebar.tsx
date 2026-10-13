@@ -13,7 +13,6 @@ import {
   Users,
   Sparkles,
   CreditCard,
-  CalendarDays,
   UserCog,
   BarChart3,
   MessageSquare,
@@ -21,10 +20,16 @@ import {
   LogOut,
   Building2,
   Layers,
+  X,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { business, user, role, logout } = useAuth();
 
@@ -45,12 +50,16 @@ export function Sidebar() {
     { name: 'Settings', href: '/settings', icon: Settings },
   ];
 
-  return (
-    <aside className="w-64 bg-slate-900 text-slate-200 flex flex-col shrink-0 min-h-screen border-r border-slate-800">
+  const handleLinkClick = () => {
+    if (onClose) onClose();
+  };
+
+  const navContent = (
+    <div className="flex flex-col h-full">
       {/* Brand Header */}
-      <div className="p-5 border-b border-slate-800 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-cyan-400 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-sky-500/20">
+      <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between">
+        <Link href="/" onClick={handleLinkClick} className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-cyan-400 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-sky-500/20 shrink-0">
             MK
           </div>
           <div>
@@ -61,6 +70,17 @@ export function Sidebar() {
             </div>
           </div>
         </Link>
+
+        {/* Mobile close button */}
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="lg:hidden p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+            aria-label="Close navigation menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        )}
       </div>
 
       {/* Active Business Badge */}
@@ -69,7 +89,7 @@ export function Sidebar() {
           <Building2 className="w-4 h-4 text-sky-400 shrink-0" />
           <span className="truncate font-medium">{business?.name || 'MaakLeans Executive'}</span>
         </div>
-        <div className="text-[11px] text-slate-400 pl-6 capitalize">
+        <div className="text-[11px] text-slate-400 pl-6 capitalize truncate">
           Currency: {business?.currency || 'NGN'} (₦)
         </div>
       </div>
@@ -85,14 +105,15 @@ export function Sidebar() {
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={handleLinkClick}
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 mb-2 ${
                   isActive
                     ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/30'
                     : 'bg-sky-600/20 text-sky-300 hover:bg-sky-600/30 border border-sky-500/30'
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                <span>{item.name}</span>
+                <Icon className="w-4 h-4 shrink-0" />
+                <span className="truncate">{item.name}</span>
               </Link>
             );
           }
@@ -101,14 +122,15 @@ export function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
+              onClick={handleLinkClick}
               className={`flex items-center gap-3 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                 isActive
                   ? 'bg-slate-800 text-sky-400 font-semibold'
                   : 'text-slate-300 hover:bg-slate-800/60 hover:text-white'
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? 'text-sky-400' : 'text-slate-400'}`} />
-              <span>{item.name}</span>
+              <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-sky-400' : 'text-slate-400'}`} />
+              <span className="truncate">{item.name}</span>
             </Link>
           );
         })}
@@ -119,17 +141,48 @@ export function Sidebar() {
         <div className="flex items-center justify-between">
           <div className="truncate pr-2">
             <div className="text-sm font-semibold text-white truncate">{user?.name || 'Staff User'}</div>
-            <div className="text-xs text-sky-400 font-mono tracking-wider">{role || 'STAFF'}</div>
+            <div className="text-xs text-sky-400 font-mono tracking-wider truncate">{role || 'STAFF'}</div>
           </div>
           <button
-            onClick={logout}
+            onClick={() => {
+              handleLinkClick();
+              logout();
+            }}
             title="Log Out"
-            className="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors"
+            className="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors shrink-0"
           >
             <LogOut className="w-4 h-4" />
           </button>
         </div>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Persistent Sidebar */}
+      <aside className="hidden lg:flex w-64 bg-slate-900 text-slate-200 flex-col shrink-0 min-h-screen border-r border-slate-800 sticky top-0 h-screen">
+        {navContent}
+      </aside>
+
+      {/* Mobile Drawer Backdrop */}
+      {isOpen && (
+        <div
+          onClick={onClose}
+          className="fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-sm lg:hidden transition-opacity"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Off-canvas Drawer */}
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-slate-900 text-slate-200 flex flex-col lg:hidden transition-transform duration-300 ease-in-out shadow-2xl ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+        aria-label="Mobile Navigation"
+      >
+        {navContent}
+      </aside>
+    </>
   );
 }

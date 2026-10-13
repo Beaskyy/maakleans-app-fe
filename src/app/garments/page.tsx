@@ -116,7 +116,7 @@ export default function GarmentTrackingPage() {
       </div>
 
       {/* Stage Distribution Pipeline Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">
         {[
           { key: 'RECEIVED', label: 'Received' },
           { key: 'INSPECTION', label: 'Inspection' },
@@ -141,7 +141,7 @@ export default function GarmentTrackingPage() {
             >
               {st.label}
             </div>
-            <div className="text-xl font-black mt-1">
+            <div className="text-lg sm:text-xl font-black mt-1">
               {stageCounts ? stageCounts[st.key] || 0 : 0}
             </div>
           </button>
@@ -149,8 +149,8 @@ export default function GarmentTrackingPage() {
       </div>
 
       {/* Search & Filter Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-center gap-3">
-        <div className="w-full md:flex-1 relative">
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div className="w-full sm:flex-1 relative">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
@@ -161,12 +161,12 @@ export default function GarmentTrackingPage() {
           />
         </div>
 
-        <div className="flex items-center gap-2 w-full md:w-auto">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <span className="text-xs font-semibold text-slate-400 uppercase">Stage:</span>
           <select
             value={stageFilter}
             onChange={(e) => setStageFilter(e.target.value)}
-            className="bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            className="w-full sm:w-auto bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
           >
             <option value="ALL">All Stages</option>
             {STAGE_ORDER.map((st) => (
@@ -181,7 +181,7 @@ export default function GarmentTrackingPage() {
       {/* Garments Table */}
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm min-w-[780px]">
             <thead>
               <tr className="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                 <th className="py-3.5 px-4">Garment Tag #</th>
@@ -272,8 +272,8 @@ export default function GarmentTrackingPage() {
 
       {/* Move Stage Modal */}
       {selectedGarment && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
+        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-slate-900 mb-1">Update Garment Stage</h3>
             <p className="text-xs text-slate-500 mb-4">
               Moving tag{' '}

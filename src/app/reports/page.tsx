@@ -75,7 +75,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Financial Comparison Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-1">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
             Total Invoiced Value

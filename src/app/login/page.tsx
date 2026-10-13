@@ -96,7 +96,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-slate-50">
       {/* Left Marketing / Value Proposition Panel */}
-      <div className="md:w-1/2 bg-slate-900 text-white p-8 md:p-14 flex flex-col justify-between relative overflow-hidden">
+      <div className="md:w-1/2 bg-slate-900 text-white p-6 sm:p-8 md:p-14 flex flex-col justify-between relative overflow-hidden min-h-[40vh] md:min-h-0">
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-sky-500/10 blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"></div>
 
@@ -113,8 +113,8 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="mt-12 space-y-4 max-w-lg">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+          <div className="mt-8 md:mt-12 space-y-4 max-w-lg">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
               Enterprise Laundry & Dry-Cleaning Operations Platform
             </h1>
             <p className="text-slate-400 text-base leading-relaxed">
@@ -122,7 +122,7 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <div className="mt-10 space-y-3">
+          <div className="mt-6 md:mt-10 space-y-3 hidden sm:block">
             {[
               'Individual Garment Tag Tracking & Location Movement',
               'Multi-Step Order Wizard with Authoritative NGN Pricing',

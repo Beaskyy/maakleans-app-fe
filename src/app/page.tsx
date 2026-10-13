@@ -86,22 +86,22 @@ export default function DashboardPage() {
       {/* Top Controls Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
             Operations Dashboard
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
             Real-time multi-tenant metrics derived directly from database records.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
           {/* Timeframe Selector */}
-          <div className="bg-white border border-slate-200 rounded-xl p-1 flex items-center text-xs font-semibold shadow-sm">
+          <div className="bg-white border border-slate-200 rounded-xl p-1 flex items-center text-xs font-semibold shadow-sm overflow-x-auto max-w-full">
             {(['today', 'week', 'month', 'all'] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setTimeframe(t)}
-                className={`px-3 py-1.5 rounded-lg transition-all capitalize ${
+                className={`px-2.5 sm:px-3 py-1.5 rounded-lg transition-all capitalize whitespace-nowrap ${
                   timeframe === t
                     ? 'bg-sky-600 text-white shadow-sm'
                     : 'text-slate-600 hover:text-slate-900'
@@ -112,35 +112,37 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          <button
-            onClick={() => refetch()}
-            disabled={isFetching}
-            className="p-2.5 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 text-slate-600 shadow-sm transition-colors"
-            title="Refresh Live Data"
-          >
-            <RefreshCw className={`w-4 h-4 ${isFetching ? 'animate-spin text-sky-600' : ''}`} />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => refetch()}
+              disabled={isFetching}
+              className="p-2 sm:p-2.5 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 text-slate-600 shadow-sm transition-colors"
+              title="Refresh Live Data"
+            >
+              <RefreshCw className={`w-4 h-4 ${isFetching ? 'animate-spin text-sky-600' : ''}`} />
+            </button>
 
-          <button
-            onClick={() => downloadCsvReport()}
-            className="flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-slate-700 hover:bg-slate-50 text-xs font-semibold shadow-sm transition-colors"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>Export CSV</span>
-          </button>
+            <button
+              onClick={() => downloadCsvReport()}
+              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-slate-700 hover:bg-slate-50 text-xs font-semibold shadow-sm transition-colors whitespace-nowrap"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Export CSV</span>
+            </button>
 
-          <Link
-            href="/orders/new"
-            className="flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md shadow-sky-600/20 transition-all"
-          >
-            <Plus className="w-4 h-4" />
-            <span>Intake Order</span>
-          </Link>
+            <Link
+              href="/orders/new"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md shadow-sky-600/20 transition-all whitespace-nowrap"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Intake Order</span>
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Orders Today */}
         <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow transition-shadow">
           <div className="flex items-center justify-between">
@@ -207,9 +209,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Financial Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {/* Total Order Value */}
-        <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 rounded-2xl shadow-md border border-slate-700">
+        <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 sm:p-6 rounded-2xl shadow-md border border-slate-700">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
               Total Order Value
@@ -223,7 +225,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Payments Collected */}
-        <div className="bg-gradient-to-br from-emerald-900/90 to-emerald-800 text-white p-6 rounded-2xl shadow-md border border-emerald-700/60">
+        <div className="bg-gradient-to-br from-emerald-900/90 to-emerald-800 text-white p-5 sm:p-6 rounded-2xl shadow-md border border-emerald-700/60">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-emerald-200 uppercase tracking-wider">
               Payments Collected
@@ -237,7 +239,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Outstanding Receivables */}
-        <div className="bg-gradient-to-br from-amber-900/90 to-amber-800 text-white p-6 rounded-2xl shadow-md border border-amber-700/60">
+        <div className="sm:col-span-2 lg:col-span-1 bg-gradient-to-br from-amber-900/90 to-amber-800 text-white p-5 sm:p-6 rounded-2xl shadow-md border border-amber-700/60">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-amber-200 uppercase tracking-wider">
               Outstanding Balances
@@ -254,7 +256,7 @@ export default function DashboardPage() {
       {/* Visual Analytics Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Orders by Status (Pie Distribution) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-sm min-w-0">
           <h2 className="text-base font-bold text-slate-900 mb-1">Orders by Processing Status</h2>
           <p className="text-xs text-slate-500 mb-4">Live workload breakdown</p>
 
@@ -304,7 +306,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Revenue by Service Type (Bar Chart) */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+        <div className="lg:col-span-2 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between min-w-0">
           <div>
             <div className="flex items-center justify-between mb-1">
               <h2 className="text-base font-bold text-slate-900">Revenue by Service Category</h2>
@@ -349,7 +351,7 @@ export default function DashboardPage() {
       {/* Operational Queues: Recent Orders & Upcoming Deliveries */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Orders Table */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6">
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 shadow-sm p-4 sm:p-6 min-w-0">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-base font-bold text-slate-900">Recent Customer Orders</h2>
@@ -364,8 +366,8 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+          <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+            <table className="w-full text-left text-sm min-w-[580px]">
               <thead>
                 <tr className="border-b border-slate-100 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                   <th className="pb-3">Order #</th>
